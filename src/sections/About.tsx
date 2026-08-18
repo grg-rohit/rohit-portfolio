@@ -22,9 +22,14 @@ export const About = ()=>{
         <section id="about" className="relative py-24 md:py-32 border-t border-border">
             <div className="container mx-auto px-6">
                 <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
-                    <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground animate-fade-in">
-                        About
-                    </h2>
+                    <div className="flex items-center gap-3 animate-fade-in">
+                        <span className="border border-border px-2 py-1 font-mono text-[10px] text-muted-foreground">
+                            01
+                        </span>
+                        <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                            // About
+                        </h2>
+                    </div>
                     <div className="max-w-2xl space-y-5 text-base leading-relaxed text-muted-foreground animate-fade-in animation-delay-100">
                         <p>
                             I got into backend work because I liked knowing exactly why something
@@ -57,18 +62,18 @@ export const About = ()=>{
 
                 {/* Strengths + Education + Languages */}
                 <div className="grid lg:grid-cols-3 gap-px bg-border mt-px animate-fade-in animation-delay-300">
-                    <div className="bg-background p-6">
+                    <div className="bg-background border-t border-border p-6">
                         <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                             Strengths
                         </span>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-3">
                             {strengths.map((s, i) => (
                                 <Tag key={i}>{s}</Tag>
                             ))}
                         </div>
                     </div>
 
-                    <div className="bg-background p-6">
+                    <div className="bg-background border-t border-border p-6">
                         <div className="flex items-center gap-2 text-muted-foreground mb-4">
                             <GraduationCap className="w-4 h-4" />
                             <span className="text-xs font-semibold uppercase tracking-[0.2em]">Education</span>
@@ -91,12 +96,12 @@ export const About = ()=>{
                         </div>
                     </div>
 
-                    <div className="bg-background p-6">
+                    <div className="bg-background border-t border-border p-6">
                         <div className="flex items-center gap-2 text-muted-foreground mb-4">
                             <Languages className="w-4 h-4" />
                             <span className="text-xs font-semibold uppercase tracking-[0.2em]">Languages</span>
                         </div>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-3">
                             <Tag>Nepali</Tag>
                             <Tag>English</Tag>
                         </div>

@@ -157,7 +157,7 @@
       opacity: 0.2;
     }
     100% {
-      transform: translate(var(--drift-x, 10px), -60vh);
+      transform: translate(var(--drift-x, 10px), -80vh);
       opacity: 0;
     }
   }
