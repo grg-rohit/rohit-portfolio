@@ -1,5 +1,7 @@
 import { SectionLabel } from "@/components/SectionLabel";
 import { Tag } from "@/components/Tag";
+import { CornerMarks } from "@/components/CornerMarks";
+import { trackSpotlight } from "@/lib/spotlight";
 import { MapPin } from "lucide-react";
 
 const experience = {
@@ -22,13 +24,17 @@ export const Experience = ()=>{
             <div className="container mx-auto px-6">
                 <SectionLabel label="experience" meta={experience.period} />
 
-                <div className="glass max-w-3xl animate-fade-in animation-delay-100">
+                <div
+                    className="spotlight glass relative max-w-3xl animate-fade-in animation-delay-100"
+                    onMouseMove={trackSpotlight}
+                >
+                    <CornerMarks />
                     <div className="flex flex-wrap items-start justify-between gap-4 border-b border-border px-6 py-5 sm:px-8">
                         <div>
-                            <h3 className="font-mono text-xl md:text-2xl tracking-tight">{experience.role}</h3>
+                            <h3 className="text-xl md:text-2xl font-semibold tracking-tight">{experience.role}</h3>
                             <p className="text-muted-foreground mt-1">{experience.company}</p>
                         </div>
-                        <span className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground pt-1">
+                        <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground pt-1">
                             <MapPin className="w-3.5 h-3.5" />
                             {experience.location}
                         </span>
@@ -38,7 +44,7 @@ export const Experience = ()=>{
                         <ul className="space-y-3 mb-6">
                             {experience.points.map((point, idx) => (
                                 <li key={idx} className="flex gap-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
-                                    <span className="text-primary shrink-0 font-mono">›</span>
+                                    <span className="text-muted-foreground shrink-0">›</span>
                                     <span>{point}</span>
                                 </li>
                             ))}

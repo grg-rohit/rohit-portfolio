@@ -1,28 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: oklch(0.17 0.014 160);
-  --color-foreground: oklch(0.94 0.008 150);
+  --color-background: #0a0d12;
+  --color-foreground: #f5f7fa;
 
-  --color-card: oklch(0.21 0.015 160);
+  --color-card: #10141b;
 
-  --color-primary: oklch(0.86 0.19 152);
-  --color-primary-foreground: oklch(0.17 0.03 160);
+  --color-primary: #00ff66;
+  --color-primary-foreground: #04140a;
 
-  --color-secondary: oklch(0.26 0.016 160);
-  --color-secondary-foreground: oklch(0.86 0.19 152);
+  --color-secondary: #161b23;
+  --color-secondary-foreground: #e2e8f0;
 
-  --color-muted: oklch(0.24 0.014 160);
-  --color-muted-foreground: oklch(0.68 0.012 155);
+  --color-muted: #161b23;
+  --color-muted-foreground: #8b95a3;
 
-  --color-border: oklch(0.31 0.016 160);
+  --color-border: rgba(255, 255, 255, 0.08);
 
   --radius: 0.75rem;
 
   --color-highlight: #f5a623;
-  --color-surface: oklch(0.19 0.014 160);
+  --color-surface: #0d1117;
 
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base{
@@ -44,16 +45,16 @@
 
 @layer components{
   .glass{
-    background-color: color-mix(in srgb, var(--color-surface) 50%, transparent);
+    background-color: color-mix(in srgb, var(--color-surface) 55%, transparent);
     backdrop-filter: blur(16px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+    border: 1px solid var(--color-border);
 
   }
 
   .glass-strong{
-    background-color: color-mix(in srgb, var(--color-surface) 80%, transparent);
+    background-color: color-mix(in srgb, var(--color-surface) 85%, transparent);
     backdrop-filter: blur(16px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+    border: 1px solid color-mix(in srgb, white 12%, transparent);
 
   }
 
@@ -74,9 +75,55 @@
 
   .circuit-grid {
     background-image:
-      linear-gradient(to right, color-mix(in srgb, var(--color-primary) 6%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--color-primary) 6%, transparent) 1px, transparent 1px);
-    background-size: 64px 64px;
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .screen-inset {
+    box-shadow: inset 0 2px 24px color-mix(in srgb, black 40%, transparent);
+  }
+
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    background: radial-gradient(
+      380px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      rgba(255, 255, 255, 0.06),
+      transparent 70%
+    );
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .spotlight:hover::after {
+    opacity: 1;
+  }
+
+  .sweep {
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(
+      100deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 70%
+    );
+    background-size: 240% 100%;
+    background-position: 100% 0;
+    transition: background-position 0.6s ease;
+  }
+
+  .sweep:hover {
+    background-position: 0 0;
   }
 
 }
@@ -98,20 +145,25 @@
     animation: fade-in 0.8s ease-out both;
   }
 
-  @keyframes slow-drift {
-    0%,
-    100% {
+  @keyframes drift-up {
+    0% {
       transform: translate(0, 0);
+      opacity: 0;
     }
-    25% {
-      transform: translate(20px, -30px);
+    10% {
+      opacity: 0.2;
     }
-    50% {
-      transform: translate(-15px, -20px);
+    90% {
+      opacity: 0.2;
     }
-    75% {
-      transform: translate(30px, 10px);
+    100% {
+      transform: translate(var(--drift-x, 10px), -60vh);
+      opacity: 0;
     }
+  }
+
+  .animate-drift-up {
+    animation: drift-up linear infinite;
   }
 
   @keyframes marquee {
@@ -158,29 +210,5 @@
 
   .animation-delay-800 {
     animation-delay: 800ms;
-  }
-
-  @keyframes animated-border {
-    0% {
-      stroke-dashoffset: 400;
-    }
-    100% {
-      stroke-dashoffset: -550;
-    }
-  }
-
-  .group:hover .animated-border-path {
-    animation: animated-border 1.5s linear infinite;
-  }
-
-  .animated-border:hover {
-    background-color: color-mix(
-      in srgb,
-      var(--color-primary) 15%,
-      transparent
-    );
-    backdrop-filter: blur(16px);
-    box-shadow: 0 0 20px
-      color-mix(in srgb, var(--color-primary) 20%, transparent);
   }
 }

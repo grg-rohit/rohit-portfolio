@@ -1,4 +1,6 @@
 import { ArrowRight, Download, ExternalLink } from "lucide-react";
+import { CornerMarks } from "@/components/CornerMarks";
+import { trackSpotlight } from "@/lib/spotlight";
 
 const focusAreas = ["REST APIs", "Payments", "Realtime", "Matching"];
 
@@ -12,6 +14,15 @@ const skills = [
     "Stripe",
     "GraphQL",
 ]
+
+// Fixed, hand-placed dust particles — deliberately not randomized so layout never shifts on reload
+const dustParticles = Array.from({ length: 18 }, (_, i) => ({
+    left: `${Math.round((i * 100) / 18)}%`,
+    size: 2 + (i % 3),
+    duration: `${14 + (i % 6) * 3}s`,
+    delay: `${(i % 9) * 1.2}s`,
+    driftX: `${(i % 2 === 0 ? 1 : -1) * (10 + (i % 4) * 6)}px`,
+}));
 
 // Placeholder — swap /public/profile.jpg for a real headshot when ready
 const avatarSrc = `${import.meta.env.BASE_URL}profile.jpg`;
@@ -31,27 +42,33 @@ WORKER celery.reconcile      done 0 retries`;
 export const Hero = ()=>{
     return(
         <section className="circuit-grid relative min-h-screen flex items-center overflow-hidden pt-16 pb-20">
-            {/* Ambient glow */}
+            {/* Center radial spotlight */}
             <div
                 aria-hidden
-                className="pointer-events-none absolute -left-40 -top-40 size-[34rem] rounded-full opacity-25 blur-3xl"
-                style={{ background: "radial-gradient(circle, var(--color-primary), transparent 65%)" }}
-            />
-
-            {/* Particle dots */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(70)].map((_, i) => (
+                className="pointer-events-none absolute inset-0 flex items-start justify-center"
+            >
                 <div
-                    key={i}
-                    className="absolute w-1.5 h-1.5 rounded-full opacity-60"
-                    style={{
-                    backgroundColor: "var(--color-primary)",
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
-                    animationDelay: `${Math.random() * 5}s`,
-                    }}
+                    className="mt-[-10%] h-[60vh] w-[80vw] max-w-4xl rounded-full opacity-40 blur-3xl"
+                    style={{ background: "radial-gradient(circle, rgba(255,255,255,0.06), transparent 70%)" }}
                 />
+            </div>
+
+            {/* Floating dust particles, drifting slowly upward */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none hidden sm:block">
+                {dustParticles.map((p, i) => (
+                    <span
+                        key={i}
+                        aria-hidden="true"
+                        className="animate-drift-up absolute bottom-0 rounded-full bg-white blur-[1px]"
+                        style={{
+                            left: p.left,
+                            width: p.size,
+                            height: p.size,
+                            animationDuration: p.duration,
+                            animationDelay: p.delay,
+                            ["--drift-x" as string]: p.driftX,
+                        }}
+                    />
                 ))}
             </div>
 
@@ -61,20 +78,20 @@ export const Hero = ()=>{
                     <div>
                         {/* Status badge */}
                         <div className="animate-fade-in mb-8">
-                            <span className="glass inline-flex items-center gap-2 px-3 py-1.5 font-mono text-xs tracking-[0.14em] text-muted-foreground">
+                            <span className="glass inline-flex items-center gap-2 px-3 py-1.5 text-xs tracking-[0.14em] text-muted-foreground">
                                 <span className="size-1.5 rounded-full bg-primary" />
                                 open to backend roles — kathmandu / remote
                             </span>
                         </div>
 
                         {/* Headline */}
-                        <h1 className="font-mono font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight animate-fade-in animation-delay-100">
+                        <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight animate-fade-in animation-delay-100">
                             <span className="text-foreground">Backend Engineer.</span>
-                            <span className="block mt-5 text-xl sm:text-2xl md:text-3xl leading-snug font-normal normal-case tracking-normal text-muted-foreground">
+                            <span className="block mt-5 text-xl sm:text-2xl md:text-3xl leading-snug font-normal text-muted-foreground">
                                 I design and build the{" "}
-                                <span className="text-primary text-glow">APIs</span>,{" "}
-                                <span className="text-primary text-glow">databases</span> and{" "}
-                                <span className="text-primary text-glow">infrastructure</span>{" "}
+                                <span className="text-foreground">APIs</span>,{" "}
+                                <span className="text-foreground">databases</span> and{" "}
+                                <span className="text-foreground">infrastructure</span>{" "}
                                 production runs on.
                             </span>
                         </h1>
@@ -90,7 +107,7 @@ export const Hero = ()=>{
                         <div className="mt-10 flex flex-wrap items-center gap-4 animate-fade-in animation-delay-300">
                             <a
                                 href="#contact"
-                                className="glow-primary group inline-flex items-center gap-2 bg-primary px-6 py-3 font-mono text-sm uppercase tracking-[0.16em] text-primary-foreground transition-transform hover:-translate-y-0.5"
+                                className="glow-primary group inline-flex items-center gap-2 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-primary-foreground transition-transform hover:-translate-y-0.5"
                             >
                                 contact me
                                 <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
@@ -98,14 +115,14 @@ export const Hero = ()=>{
                             <a
                                 href={resumeSrc}
                                 download={resumeFile}
-                                className="glass inline-flex items-center gap-2 px-6 py-3 font-mono text-sm uppercase tracking-[0.16em] transition-colors hover:border-primary hover:text-primary"
+                                className="sweep glass inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-foreground transition-colors hover:border-white/20"
                             >
                                 <Download className="size-3.5" />
                                 download cv
                             </a>
                             <a
                                 href="#projects"
-                                className="font-mono text-sm uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-primary"
+                                className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
                             >
                                 view work ↳
                             </a>
@@ -115,23 +132,27 @@ export const Hero = ()=>{
                     {/* Right: profile card */}
                     <div className="w-full max-w-sm mx-auto lg:mx-0 lg:sticky lg:top-28 animate-fade-in animation-delay-300">
                         <div className="glass overflow-hidden">
-                            <div className="relative aspect-4/5">
+                            <div
+                                className="spotlight relative aspect-4/5"
+                                onMouseMove={trackSpotlight}
+                            >
+                                <CornerMarks />
                                 <img
                                     src={avatarSrc}
                                     alt="Rohit Gurung"
                                     className="w-full h-full object-cover object-[50%_25%]"
                                 />
-                                <span className="glass absolute top-3 left-3 inline-flex items-center gap-2 px-3 py-1.5 font-mono text-xs tracking-[0.1em] text-primary">
+                                <span className="glass absolute top-3 left-3 inline-flex items-center gap-2 px-3 py-1.5 text-xs tracking-[0.1em] text-foreground">
                                     <span className="size-1.5 rounded-full bg-primary" />
                                     available for backend work
                                 </span>
                             </div>
 
                             <div className="border-t border-border px-5 py-4">
-                                <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                                <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                                     currently building with
                                 </p>
-                                <p className="mt-1.5 font-mono text-base sm:text-lg text-foreground">
+                                <p className="mt-1.5 text-base sm:text-lg font-medium text-foreground">
                                     Python, FastAPI &amp; PostgreSQL
                                 </p>
                             </div>
@@ -139,18 +160,18 @@ export const Hero = ()=>{
                             <div className="border-t border-border px-5 py-4">
                                 <a
                                     href="#projects"
-                                    className="group mb-3 flex items-center justify-between transition-colors hover:text-primary"
+                                    className="group mb-3 flex items-center justify-between transition-colors hover:text-foreground"
                                 >
-                                    <span className="font-mono text-xs uppercase tracking-[0.15em] text-foreground group-hover:text-primary">
+                                    <span className="text-xs font-semibold uppercase tracking-[0.15em] text-foreground">
                                         Backend Focus
                                     </span>
-                                    <ExternalLink className="size-3.5 text-muted-foreground group-hover:text-primary" />
+                                    <ExternalLink className="size-3.5 text-muted-foreground group-hover:text-foreground" />
                                 </a>
-                                <div className="grid grid-cols-2 gap-2">
+                                <div className="flex flex-wrap gap-2">
                                     {focusAreas.map((tag) => (
                                         <span
                                             key={tag}
-                                            className="border border-border px-2.5 py-2 text-center font-mono text-xs text-muted-foreground"
+                                            className="border border-border px-2.5 py-1.5 text-xs text-muted-foreground"
                                         >
                                             {tag}
                                         </span>
@@ -162,8 +183,9 @@ export const Hero = ()=>{
                 </div>
 
                 {/* Circuit + terminal */}
-                <div className="relative mt-16 select-none animate-fade-in animation-delay-400" aria-hidden="true">
+                <div className="relative mt-16 select-none animate-fade-in animation-delay-400">
                     <svg
+                        aria-hidden="true"
                         viewBox="0 0 1200 260"
                         className="h-auto w-full text-border hidden md:block"
                         fill="none"
@@ -172,11 +194,11 @@ export const Hero = ()=>{
                     >
                         <path d="M0 190 H160 L210 140 H360" />
                         <path d="M60 190 V230 H300" />
-                        <circle cx="360" cy="140" r="4" className="text-primary" stroke="currentColor" />
+                        <circle cx="360" cy="140" r="4" fill="none" stroke="currentColor" />
                         <path d="M360 140 H520 L560 100 H700" />
                         <path d="M1200 90 H1050 L1000 140 H840" />
                         <path d="M1140 90 V50 H900" />
-                        <circle cx="840" cy="140" r="4" className="text-primary" stroke="currentColor" />
+                        <circle cx="840" cy="140" r="4" fill="none" stroke="currentColor" />
                         <path d="M840 140 H700" />
                         {[240, 260, 280, 300].map((x) => (
                             <path key={x} d={`M${x} 60 V80`} />
@@ -192,15 +214,29 @@ export const Hero = ()=>{
                         <path d="M120 40 a70 70 0 0 1 70 -20" />
                     </svg>
 
-                    <div className="relative glass mx-auto -mt-10 md:-mt-20 max-w-3xl shadow-2xl">
-                        <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
-                            <span className="size-2.5 rounded-full border border-border" />
-                            <span className="size-2.5 rounded-full border border-border" />
-                            <span className="ml-3 font-mono text-xs text-muted-foreground">
-                                pickncare_api — uvicorn
+                    <div
+                        className="spotlight relative glass mx-auto -mt-10 md:-mt-20 max-w-3xl shadow-2xl"
+                        onMouseMove={trackSpotlight}
+                    >
+                        <CornerMarks />
+                        <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-2.5">
+                            <div className="flex items-center gap-2">
+                                <span className="size-2.5 rounded-full border border-border" />
+                                <span className="size-2.5 rounded-full border border-border" />
+                                <span className="size-2.5 rounded-full border border-border" />
+                                <span className="ml-2 font-mono text-xs text-muted-foreground">
+                                    pickncare_api — uvicorn
+                                </span>
+                            </div>
+                            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-primary">
+                                <span className="relative flex size-1.5">
+                                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                                    <span className="relative inline-flex size-1.5 rounded-full bg-primary" />
+                                </span>
+                                live
                             </span>
                         </div>
-                        <pre className="overflow-x-auto px-5 py-4 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                        <pre className="screen-inset overflow-x-auto px-5 py-4 font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
 {terminalLog}
                         </pre>
                     </div>
@@ -208,14 +244,14 @@ export const Hero = ()=>{
 
                 {/* Skills Section */}
                 <div className="mt-16 animate-fade-in animation-delay-600">
-                <p className="font-mono text-xs tracking-[0.2em] uppercase text-primary mb-6 text-center">
-                    $ stack --list
+                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-6 text-center">
+                    Stack
                 </p>
                 <div className="relative overflow-hidden">
                     <div className="flex animate-marquee">
                     {[...skills, ...skills].map((skill, idx) => (
                         <div key={idx} className="flex-shrink-0 px-8 py-4">
-                        <span className="font-mono text-xl font-semibold text-muted-foreground/50 hover:text-muted-foreground transition-colors duration-300 cursor-pointer">
+                        <span className="text-xl font-semibold text-muted-foreground/50 hover:text-muted-foreground transition-colors duration-300 cursor-pointer">
                             {skill}
                         </span>
                         </div>

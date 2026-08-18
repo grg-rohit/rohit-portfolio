@@ -14,9 +14,8 @@ export const Navbar = ()=>{
     return(
         <header className="glass sticky top-0 left-0 right-0 py-5 z-50 border-b border-border">
             <nav className="container mx-auto px-6 flex items-center justify-between">
-                <a href="#" className="font-mono text-lg tracking-tight hover:text-primary">
-                    <span className="text-foreground">ROHIT</span>
-                    <span className="text-primary">.GURUNG</span>
+                <a href="#" className="text-lg font-semibold tracking-tight text-foreground">
+                    ROHIT<span className="text-muted-foreground">.GURUNG</span>
                 </a>
 
                 {/*Desktop Navigation*/}
@@ -25,8 +24,9 @@ export const Navbar = ()=>{
                         <a
                             href={link.href}
                             key={index}
-                            className="font-mono text-xs tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+                            className="group relative text-xs tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground transition-colors">
                                 {link.label}
+                                <span className="absolute -bottom-1 left-0 h-px w-0 bg-foreground/40 transition-all duration-300 group-hover:w-full" />
                         </a>
                     ))}
                 </div>
@@ -35,7 +35,7 @@ export const Navbar = ()=>{
 
                 <a
                     href="#contact"
-                    className="hidden md:inline-flex items-center gap-1.5 font-mono text-xs tracking-[0.15em] uppercase font-bold text-primary hover:text-primary/80 transition-colors"
+                    className="hidden md:inline-flex items-center gap-1.5 text-xs tracking-[0.15em] uppercase font-semibold text-foreground hover:text-muted-foreground transition-colors"
                 >
                     Hire Me <ArrowRight className="w-3.5 h-3.5" />
                 </a>
@@ -58,7 +58,7 @@ export const Navbar = ()=>{
                     <a
                         href={link.href}
                         key={index}
-                        className="font-mono text-sm tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground rounded-full hover:bg-surface py-2"
+                        className="text-sm tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground rounded-full hover:bg-surface py-2"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
                         {link.label}
@@ -68,7 +68,7 @@ export const Navbar = ()=>{
                     <a
                         href="#contact"
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-md bg-primary text-primary-foreground font-mono text-xs tracking-[0.15em] uppercase font-bold"
+                        className="inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-md bg-primary text-primary-foreground text-xs tracking-[0.15em] uppercase font-bold"
                     >
                         Hire Me <ArrowRight className="w-3.5 h-3.5" />
                     </a>

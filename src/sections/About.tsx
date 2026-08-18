@@ -22,8 +22,8 @@ export const About = ()=>{
         <section id="about" className="relative py-24 md:py-32 border-t border-border">
             <div className="container mx-auto px-6">
                 <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
-                    <h2 className="font-mono text-sm uppercase tracking-[0.22em] text-primary animate-fade-in">
-                        // about
+                    <h2 className="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground animate-fade-in">
+                        About
                     </h2>
                     <div className="max-w-2xl space-y-5 text-base leading-relaxed text-muted-foreground animate-fade-in animation-delay-100">
                         <p>
@@ -39,7 +39,7 @@ export const About = ()=>{
                             everywhere: make it correct, make it fast, and make sure it stays that
                             way after ten more features ship.
                         </p>
-                        <p className="font-mono text-sm text-foreground">
+                        <p className="text-sm font-medium text-foreground">
                             1+ years · Binaryburst Solution · Kathmandu, Nepal
                         </p>
                     </div>
@@ -49,7 +49,7 @@ export const About = ()=>{
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border mt-16 animate-fade-in animation-delay-200">
                     {stats.map((stat, idx) => (
                         <div key={idx} className="bg-background px-4 py-6 text-center">
-                            <div className="text-3xl md:text-4xl font-mono font-bold text-primary">{stat.value}</div>
+                            <div className="text-3xl md:text-4xl font-bold text-foreground">{stat.value}</div>
                             <div className="text-xs md:text-sm text-muted-foreground mt-2">{stat.label}</div>
                         </div>
                     ))}
@@ -58,7 +58,7 @@ export const About = ()=>{
                 {/* Strengths + Education + Languages */}
                 <div className="grid lg:grid-cols-3 gap-px bg-border mt-px animate-fade-in animation-delay-300">
                     <div className="bg-background p-6">
-                        <span className="mb-4 block font-mono text-xs uppercase tracking-[0.2em] text-primary">
+                        <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                             Strengths
                         </span>
                         <div className="flex flex-wrap gap-2">
@@ -69,9 +69,9 @@ export const About = ()=>{
                     </div>
 
                     <div className="bg-background p-6">
-                        <div className="flex items-center gap-2 text-primary mb-4">
+                        <div className="flex items-center gap-2 text-muted-foreground mb-4">
                             <GraduationCap className="w-4 h-4" />
-                            <span className="font-mono text-xs uppercase tracking-[0.2em]">Education</span>
+                            <span className="text-xs font-semibold uppercase tracking-[0.2em]">Education</span>
                         </div>
                         <div className="space-y-4">
                             <div>
@@ -79,22 +79,22 @@ export const About = ()=>{
                                 <p className="text-sm text-muted-foreground">
                                     Asian College of Higher Studies, IOST, Tribhuvan University
                                 </p>
-                                <p className="text-xs text-muted-foreground font-mono mt-1">2020 – 2025</p>
+                                <p className="text-xs text-muted-foreground mt-1">2020 – 2025</p>
                             </div>
                             <div className="pt-4 border-t border-border">
                                 <p className="font-medium text-foreground">+2 Science</p>
                                 <p className="text-sm text-muted-foreground">
                                     National School of Sciences, Lainchaur, Kathmandu
                                 </p>
-                                <p className="text-xs text-muted-foreground font-mono mt-1">2018 – 2020</p>
+                                <p className="text-xs text-muted-foreground mt-1">2018 – 2020</p>
                             </div>
                         </div>
                     </div>
 
                     <div className="bg-background p-6">
-                        <div className="flex items-center gap-2 text-primary mb-4">
+                        <div className="flex items-center gap-2 text-muted-foreground mb-4">
                             <Languages className="w-4 h-4" />
-                            <span className="font-mono text-xs uppercase tracking-[0.2em]">Languages</span>
+                            <span className="text-xs font-semibold uppercase tracking-[0.2em]">Languages</span>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             <Tag>Nepali</Tag>

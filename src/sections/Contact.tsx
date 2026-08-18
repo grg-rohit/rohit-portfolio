@@ -2,6 +2,8 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { Mail, Phone, MapPin, MessageSquare, Send, ExternalLink } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { CornerMarks } from "@/components/CornerMarks";
+import { trackSpotlight } from "@/lib/spotlight";
 
 const contactRows = [
     {
@@ -56,12 +58,12 @@ export const Contact = ()=>{
             <div className="container mx-auto px-6">
                 <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 animate-fade-in">
                     <div>
-                        <span className="glass inline-flex items-center gap-2 px-3 py-1.5 mb-6 font-mono text-xs tracking-[0.14em] text-primary">
+                        <span className="glass inline-flex items-center gap-2 px-3 py-1.5 mb-6 text-xs tracking-[0.14em] text-muted-foreground">
                             <span className="size-1.5 rounded-full bg-primary" />
                             get in touch
                         </span>
-                        <h2 className="font-mono text-3xl md:text-4xl leading-tight tracking-tight">
-                            Let&apos;s discuss <span className="text-primary text-glow">backend</span> work.
+                        <h2 className="text-3xl md:text-4xl font-bold leading-tight tracking-tight">
+                            Let&apos;s discuss <span className="text-foreground">backend</span> work.
                         </h2>
                     </div>
                     <p className="max-w-sm text-sm sm:text-base leading-relaxed text-muted-foreground">
@@ -72,11 +74,12 @@ export const Contact = ()=>{
 
                 <div className="grid lg:grid-cols-2 gap-6 animate-fade-in animation-delay-100">
                     {/* Contact details */}
-                    <div className="glass p-6 sm:p-8">
-                        <div className="border border-primary/30 text-primary p-2.5 w-fit mb-6">
+                    <div className="spotlight glass relative p-6 sm:p-8" onMouseMove={trackSpotlight}>
+                        <CornerMarks />
+                        <div className="border border-border text-foreground p-2.5 w-fit mb-6">
                             <MessageSquare className="size-5" />
                         </div>
-                        <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-2">
+                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-2">
                             Contact Details
                         </p>
                         <h3 className="text-xl font-semibold mb-3">Have a role or project in mind?</h3>
@@ -94,13 +97,13 @@ export const Contact = ()=>{
                                         href={row.href}
                                         target={row.external ? "_blank" : undefined}
                                         rel={row.external ? "noopener noreferrer" : undefined}
-                                        className="group flex items-center gap-4 border border-border px-4 py-3.5 transition-colors hover:border-primary"
+                                        className="sweep group flex items-center gap-4 border border-border px-4 py-3.5 transition-colors hover:border-white/20"
                                     >
-                                        <span className="border border-border p-2 text-primary shrink-0 transition-colors group-hover:border-primary">
+                                        <span className="border border-border p-2 text-foreground shrink-0 transition-colors group-hover:border-white/20">
                                             <Icon className="size-4" />
                                         </span>
                                         <span className="min-w-0 flex-1">
-                                            <span className="block font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                                            <span className="block text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                                                 {row.label}
                                             </span>
                                             <span className="block text-sm sm:text-base font-medium truncate">
@@ -108,7 +111,7 @@ export const Contact = ()=>{
                                             </span>
                                         </span>
                                         {row.external && (
-                                            <ExternalLink className="size-4 text-muted-foreground shrink-0 transition-colors group-hover:text-primary" />
+                                            <ExternalLink className="size-4 text-muted-foreground shrink-0" />
                                         )}
                                     </a>
                                 );
@@ -117,8 +120,9 @@ export const Contact = ()=>{
                     </div>
 
                     {/* Message form */}
-                    <div className="glass p-6 sm:p-8">
-                        <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary mb-2">
+                    <div className="spotlight glass relative p-6 sm:p-8" onMouseMove={trackSpotlight}>
+                        <CornerMarks />
+                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-2">
                             Send a Message
                         </p>
                         <h3 className="text-xl font-semibold mb-6">Tell me what you&apos;re building.</h3>
@@ -136,7 +140,7 @@ export const Contact = ()=>{
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
                                         placeholder="Your name"
-                                        className="w-full bg-background/50 border border-border px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-background/50 border border-border px-4 py-3 text-sm focus:outline-none focus:border-white/25 transition-colors"
                                     />
                                 </div>
                                 <div>
@@ -150,7 +154,7 @@ export const Contact = ()=>{
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder="your@email.com"
-                                        className="w-full bg-background/50 border border-border px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-background/50 border border-border px-4 py-3 text-sm focus:outline-none focus:border-white/25 transition-colors"
                                     />
                                 </div>
                             </div>
@@ -165,12 +169,12 @@ export const Contact = ()=>{
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
                                     placeholder="Tell me about your project, role, or opportunity..."
-                                    className="w-full bg-background/50 border border-border px-4 py-3 text-sm leading-relaxed focus:outline-none focus:border-primary transition-colors resize-none"
+                                    className="w-full bg-background/50 border border-border px-4 py-3 text-sm leading-relaxed focus:outline-none focus:border-white/25 transition-colors resize-none"
                                 />
                             </div>
                             <button
                                 type="submit"
-                                className="glow-primary group w-full inline-flex items-center justify-center gap-2 bg-primary px-6 py-3.5 font-mono text-sm uppercase tracking-[0.16em] text-primary-foreground transition-transform hover:-translate-y-0.5"
+                                className="glow-primary group w-full inline-flex items-center justify-center gap-2 bg-primary px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-primary-foreground transition-transform hover:-translate-y-0.5"
                             >
                                 Send Message
                                 <Send className="size-3.5 transition-transform group-hover:translate-x-1" />
@@ -178,11 +182,6 @@ export const Contact = ()=>{
                         </form>
                     </div>
                 </div>
-
-                <footer className="mt-20 pt-8 border-t border-border flex flex-col gap-2 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground sm:flex-row sm:justify-between animate-fade-in animation-delay-300">
-                    <span>© {new Date().getFullYear()} Rohit Gurung</span>
-                    <span>Built with React &amp; Tailwind CSS</span>
-                </footer>
             </div>
         </section>
     );

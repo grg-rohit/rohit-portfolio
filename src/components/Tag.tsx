@@ -8,7 +8,7 @@ type TagProps = {
 export const Tag = ({ children, className = "" }: TagProps) => {
   return (
     <span
-      className={`inline-flex items-center border border-border px-2.5 py-1.5 font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground ${className}`}
+      className={`inline-flex items-center border border-border px-2.5 py-1.5 text-xs uppercase tracking-[0.1em] text-muted-foreground ${className}`}
     >
       {children}
     </span>
