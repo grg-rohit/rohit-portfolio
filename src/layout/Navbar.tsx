@@ -3,8 +3,9 @@ import { Menu, X } from "lucide-react";
 import React, {useEffect} from "react";
 const navLinks = [
     {href: "#about", label: "About"},
-    {href: "#projects", label: "Projects"},
     {href: "#experience", label: "Experience"},
+    {href: "#projects", label: "Projects"},
+    {href: "#contact", label: "Contact"},
 ]
 
 
@@ -12,7 +13,7 @@ const navLinks = [
 export const Navbar = ()=>{
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
     return(
-        <header className="fixed top-0 left-0 right-0 bg-transparent py-5 z-50">
+        <header className="fixed top-0 left-0 right-0 bg-background/70 backdrop-blur-md py-5 z-50 border-b border-border/50">
             <nav className="container mx-auto px-6 flex items-center justify-between">
                 <a href="#" className="text-xl font-bold tracking-tight hover:text-primary">
                     RG<span className="text-primary">.</span>
@@ -35,9 +36,11 @@ export const Navbar = ()=>{
                 {/*CTA Button*/}
                 
                 <div className="hidden md:block">
-                    <Button size="sm">
-                        Contact Me
-                    </Button>
+                    <a href="#contact">
+                        <Button size="sm">
+                            Contact Me
+                        </Button>
+                    </a>
                 </div>
 
 

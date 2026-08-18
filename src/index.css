@@ -163,11 +163,11 @@
   .animated-border:hover {
     background-color: color-mix(
       in srgb,
-      var(--color-primary/50) 15%,
+      var(--color-primary) 15%,
       transparent
     );
     backdrop-filter: blur(16px);
     box-shadow: 0 0 20px
-      color-mix(in srgb, var(--color-primary/50) 20%, transparent);
+      color-mix(in srgb, var(--color-primary) 20%, transparent);
   }
 }

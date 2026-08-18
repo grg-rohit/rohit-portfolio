@@ -3,14 +3,18 @@ import profile from "@/assets/hero.png";
 import Button from "@/components/Button";
 import { ArrowRight, Download } from "lucide-react";
 import { AnimatedBorderButton } from "@/components/AnimatedBorderButton";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 
 const skills = [
+    "Python",
     "FastAPI",
-    "Django",
+    "PostgreSQL",
     "Docker",
-    "Git"
+    "Redis",
+    "Celery",
+    "Stripe",
+    "GraphQL",
 ]
 
 export const Hero = ()=>{
@@ -19,12 +23,12 @@ export const Hero = ()=>{
             {/* BG */}
 
             <div className="absolute inset-0">
-                <img src={HeroImage} 
+                <img src={HeroImage}
                     alt="Hero image"
                     className="w-full h-full object-cover opacity-40"
                 />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-background/1 via-background/80 to-background">
+            <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/80 to-background">
             </div>
 
             {/* Green Dots */}
@@ -51,8 +55,8 @@ export const Hero = ()=>{
                     <div className="space-y-8">
                         <div className="animate-fade-in">
                             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
-                                <span className="w-2h-2 bg-primary rounded-full animate-pulse" />
-                                    Backend Developer 
+                                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                                    Backend Developer
                             </span>
                         </div>
 
@@ -60,44 +64,49 @@ export const Hero = ()=>{
 
                         <div className="space-y-4">
                             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in animation-delay-100">
-                                Crafting <span className="text-priimary glow-text">digital</span>
+                                Building <span className="text-primary glow-text">reliable</span>
                                 <br />
-                                experiences with
+                                backend systems with
                                 <br />
-                                <span className="font-seriif italic font-normal text-white">
+                                <span className="font-serif italic font-normal text-white">
                                 precision.
                                 </span>
                             </h1>
                             <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">
-                                Hi, I'm Rohit Gurung - a backend developer specializing in python, 
-                                FastAPI. I build scalable, performant APIs.
+                                Hi, I'm Rohit Gurung — a backend developer with 1+ years building
+                                production APIs, payments and realtime systems with Python, FastAPI
+                                and PostgreSQL.
                             </p>
                         </div>
-                    
+
                     {/* CTAs */}
 
                         <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-                            <Button size="lg">
-                                Contact Me <ArrowRight className="w-5 h-5"/>
-                            </Button>
-                            <AnimatedBorderButton>
-                                <Download className="w-5 h-5" />
-                                Download CV
-                            </AnimatedBorderButton>
+                            <a href="#contact">
+                                <Button size="lg">
+                                    Contact Me <ArrowRight className="w-5 h-5"/>
+                                </Button>
+                            </a>
+                            <a href={`${import.meta.env.BASE_URL}Rohit_Gurung_CV.docx`} download="Rohit_Gurung_CV.docx">
+                                <AnimatedBorderButton>
+                                    <Download className="w-5 h-5" />
+                                    Download CV
+                                </AnimatedBorderButton>
+                            </a>
                         </div>
 
                         {/* Social Links */}
                         <div className="flex items-center gap-4 animate-fade-in animation-delay-400">
                         <span className="text-sm text-muted-foreground">Follow Me: </span>
                         {[
-                            { icon: FaGithub, href: "https://github.com/Alish545" },
+                            { icon: FaGithub, href: "https://github.com/grg-rohit" },
                             {
                             icon: FaLinkedin,
-                            href: "https://www.linkedin.com/in/alish-tuladhar-a6377831b?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+                            href: "https://www.linkedin.com/in/rohit-gurung-679b20237",
                             },
                             {
-                            icon: FaInstagram,
-                            href: "https://www.instagram.com/alishtuladhar?igsh=cHgyNHZ3dmh4dHhr&utm_source=qr",
+                            icon: FaEnvelope,
+                            href: "mailto:grgrohit746@gmail.com",
                             },
                         ].map((social, idx) => {
                             const Icon = social.icon;
@@ -115,16 +124,16 @@ export const Hero = ()=>{
                             );
                         })}
                         </div>
-                        
+
 
                     </div>
 
                     {/* Right Column -Profile Image */}
 
-                    <div className="relative animate-fade-in aniamtion-delay-300">
+                    <div className="relative animate-fade-in animation-delay-300">
                         {/* Profile Image */}
                         <div className="relative max-w-md mx-auto">
-                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from primary/30 via-transparent to-primary/10 blur-2xl animate-pulse" />
+                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/30 via-transparent to-primary/10 blur-2xl animate-pulse" />
                         <div className="relative glass rounded-3xl p-2 glow-border">
                             <img
                             src={profile}
