@@ -9,13 +9,6 @@ Personal portfolio site, built with React, TypeScript, and Tailwind. Has a small
 - react-three-fiber / drei / three.js for the 3D bits
 - lucide-react / react-icons for icons
 
-## Running it locally
-
-```bash
-npm install
-npm run dev
-```
-
 Build for production with `npm run build`, preview the build with `npm run preview`.
 
 ## Structure
