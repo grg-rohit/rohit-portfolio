@@ -1,10 +1,11 @@
-import Button from "@/components/Button";
-import { Menu, X } from "lucide-react";
-import React, {useEffect} from "react";
+import { Menu, X, ArrowRight } from "lucide-react";
+import React from "react";
 const navLinks = [
     {href: "#about", label: "About"},
-    {href: "#projects", label: "Projects"},
     {href: "#experience", label: "Experience"},
+    {href: "#projects", label: "Work"},
+    {href: "#stack", label: "Stack"},
+    {href: "#contact", label: "Contact"},
 ]
 
 
@@ -12,33 +13,33 @@ const navLinks = [
 export const Navbar = ()=>{
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
     return(
-        <header className="fixed top-0 left-0 right-0 bg-transparent py-5 z-50">
+        <header className="glass sticky top-0 left-0 right-0 py-5 z-50 border-b border-border">
             <nav className="container mx-auto px-6 flex items-center justify-between">
-                <a href="#" className="text-xl font-bold tracking-tight hover:text-primary">
-                    RG<span className="text-primary">.</span>
+                <a href="#" className="text-lg font-semibold tracking-tight text-foreground">
+                    ROHIT<span className="text-muted-foreground">.GURUNG</span>
                 </a>
 
                 {/*Desktop Navigation*/}
-                <div className="hidden md:flex items-center gap-1">
-                    <div className="glass rounded-full px-2 py-1 flex items-center gap-1">
-                        {navLinks.map((link, index) => (
-                            <a 
-                                href={link.href} 
-                                key={index} 
-                                className="px-4 py-2 text-sm text-muted-foreground  hover:text-foreground rounded-full hover:bg-surface">
-                                    {link.label}
-                            </a>
-                        ))}
-                    </div>
+                <div className="hidden md:flex items-center gap-8">
+                    {navLinks.map((link, index) => (
+                        <a
+                            href={link.href}
+                            key={index}
+                            className="group relative text-xs tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+                                {link.label}
+                                <span className="absolute -bottom-1 left-0 h-px w-0 bg-foreground/40 transition-all duration-300 group-hover:w-full" />
+                        </a>
+                    ))}
                 </div>
 
                 {/*CTA Button*/}
-                
-                <div className="hidden md:block">
-                    <Button size="sm">
-                        Contact Me
-                    </Button>
-                </div>
+
+                <a
+                    href="#contact"
+                    className="hidden md:inline-flex items-center gap-1.5 text-xs tracking-[0.15em] uppercase font-semibold text-foreground hover:text-muted-foreground transition-colors"
+                >
+                    Hire Me <ArrowRight className="w-3.5 h-3.5" />
+                </a>
 
 
                 {/* Mobile Menu Button */}
@@ -58,21 +59,19 @@ export const Navbar = ()=>{
                     <a
                         href={link.href}
                         key={index}
-                        className="text-lg text-muted-foreground hover:text-foreground rounded-full hover:bg-surface py-2"
+                        className="text-sm tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground rounded-full hover:bg-surface py-2"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
                         {link.label}
                     </a>
                     ))}
 
-                    <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button
-                        size="sm"
+                    <a
+                        href="#contact"
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="cursor-pointer"
+                        className="inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-md bg-primary text-primary-foreground text-xs tracking-[0.15em] uppercase font-bold"
                     >
-                        Contact me
-                    </Button>
+                        Hire Me <ArrowRight className="w-3.5 h-3.5" />
                     </a>
                 </div>
                 </div>
